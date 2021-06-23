@@ -11,6 +11,6 @@ const simianRoute = require('./app/routes/index');
 
 server.use('/', simianRoute);
 
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
-server.listen(PORT);
+server.listen(port);
