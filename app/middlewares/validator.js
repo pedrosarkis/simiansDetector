@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
                 error: 'Dna must be an array'
             })
         }
-        //aqui talvez tenha que validar pra ver se não é um array de obj, ou aray de numero ou coisas assim.
+       
 
         const containsOnlyValidLetters = DNA_SEQUENCE_LETTERS.test(dna.join('').toUpperCase());
 

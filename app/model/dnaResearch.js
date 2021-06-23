@@ -5,7 +5,7 @@ const Joi = require('joi');
 
 const dnaResearchSchema = new Schema({
     createdAt: {type: Date, default: Date.now},
-    dna:  {type: Array},
+    dna: {type: Array},
     isSimian: {type: Boolean},
 })
 
