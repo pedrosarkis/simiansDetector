@@ -1,11 +1,11 @@
 'use strict';
 
-const simianDetectorComponent = require('../component/simian');
+const simianComponent = require('../component/simian');
 const DnaModel = require('../model/dnaResearch');
 
 const isSimian = async (req, res) => {
     const { dna } = req.body;
-    const result = simianDetectorComponent.checkSimianCombinations(dna);
+    const result = simianComponent.checkSimianCombinations(dna);
     const allDnaResearched = await DnaModel.getAll();
 
     const alreadyExist = allDnaResearched.some(({ dna: dnaSaved }) => dnaSaved.join('') === dna.join(''));
@@ -18,18 +18,8 @@ const isSimian = async (req, res) => {
 
 const stats = async (req, res) => {
     const allDnaResearched = await DnaModel.getAll();
-
-    const totalOfSimiansDetected = allDnaResearched.filter(({isSimian}) => isSimian).length;
-
-    const totalHumans = allDnaResearched.length - totalOfSimiansDetected;
-
-    const statsResponse = {
-        countSimians: totalOfSimiansDetected,
-        countHumans: totalHumans,
-        ratio: totalOfSimiansDetected / totalHumans
-    }
-
-    return res.json(statsResponse);
+    
+    return res.json(simianComponent.getStats(allDnaResearched));
 }
 
 module.exports = {

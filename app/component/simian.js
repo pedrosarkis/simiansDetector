@@ -2,11 +2,6 @@
 
 //const { MAX_IN_A_ROW } = require('../helper/consts/constants');
 
-const checkSimianCombinations = dna => {
-    const {horizontal, vertical, fianchettoDiagonal } = runMatrix(dna);
-
-	return checkSequence([...horizontal, ...vertical, ...[fianchettoDiagonal]]);
-}
 
 const runMatrix = dna => {
     let fianchettoDiagonal = [];
@@ -49,5 +44,20 @@ const getHasMoreThan3InARow = dnaChain => {
 }
 
 module.exports = {
-    checkSimianCombinations
+    checkSimianCombinations: dna => {
+        const {horizontal, vertical, fianchettoDiagonal } = runMatrix(dna);
+
+        return checkSequence([...horizontal, ...vertical, ...[fianchettoDiagonal]]);
+    },
+    getStats: dnaResearched => {
+        const totalOfSimiansDetected = dnaResearched.filter(({isSimian}) => isSimian).length;
+
+        const totalHumans = dnaResearched.length - totalOfSimiansDetected;
+
+        return {
+            countSimians: totalOfSimiansDetected,
+            countHumans: totalHumans,
+            ratio: totalOfSimiansDetected / totalHumans
+        }
+    }
 }
