@@ -1,6 +1,7 @@
 const Mongoose = require('mongoose');
 
-const URL = process.env.URL;
+/* istanbul ignore next */
+const URL = process.env.NODE_ENV ? process.env.URL_TEST : process.env.URL;
 
 const connectDatabase = () => {
     const connectionOptions = { reconnectTries: Number.MAX_VALUE,reconnectInterval: 500, useNewUrlParser: true };

@@ -50,7 +50,7 @@ module.exports = {
         return checkSequence([...horizontal, ...vertical, ...[fianchettoDiagonal]]);
     },
     getStats: dnaResearched => {
-        const totalOfSimiansDetected = dnaResearched.filter(({isSimian}) => isSimian).length;
+        const totalOfSimiansDetected = dnaResearched.filter(({ isSimian }) => isSimian).length;
 
         const totalHumans = dnaResearched.length - totalOfSimiansDetected;
 

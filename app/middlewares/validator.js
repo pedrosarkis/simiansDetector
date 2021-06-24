@@ -6,7 +6,8 @@ const {
 
  const {
     checkIsArray,
-    checkDnaMatchPattern
+    checkDnaMatchPattern,
+    checkIfMatriceIsNXN
  } = require('../helper/utils/utils');
 
 module.exports = (req, res, next) => {
@@ -19,7 +20,13 @@ module.exports = (req, res, next) => {
             })
         }
 
-        if(checkDnaMatchPattern(dna.join(',').toUpperCase, DNA_SEQUENCE_LETTERS)) {
+        if(!checkIfMatriceIsNXN(dna)) {
+            return res.status(302).json({
+                error: 'Dna provided is not a NxN'
+            })
+        }
+
+        if(!checkDnaMatchPattern(dna.join('').toUpperCase(), DNA_SEQUENCE_LETTERS)) {
           return res.status(302).json({
                 error: 'The dna sequence provided contain invalid letters'
             })

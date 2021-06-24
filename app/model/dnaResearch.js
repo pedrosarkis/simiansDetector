@@ -3,6 +3,7 @@ const Schema = Mongoose.Schema;
 const Joi = require('joi');
 
 
+
 const dnaResearchSchema = new Schema({
     createdAt: {type: Date, default: Date.now},
     dna: {type: Array},
@@ -22,6 +23,10 @@ dnaResearchSchema.statics.insert = async function (dna) {
 
 dnaResearchSchema.statics.getAll = async function() {
     return await this.find({}).lean();
+}
+
+dnaResearchSchema.statics.deleteById = async function (id) {
+    return await this.deleteOne({'_id': Mongoose.Types.ObjectId(id)});
 }
 
 
