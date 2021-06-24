@@ -1,5 +1,6 @@
 module.exports ={
-    compareMatrices: (matriceA, matriceB) => {
-        return matriceA.join('') === matriceB.join('');
-    }
+    compareMatrices: (matriceA, matriceB) => matriceA.join('') === matriceB.join(''),
+    checkIsArray: dna =>  Array.isArray(dna),
+    checkDnaMatchPattern: (dna, pattern) => pattern.test(dna),
+
 }
