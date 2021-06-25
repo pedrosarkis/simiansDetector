@@ -1,9 +1,9 @@
 # simiansDetector
 Para executar o projeto localmente, clone o repositório, e execute o seguinte comando na pasta raíz do projeto <br>
-**node server.js **
+<b> node server.js </b>
 
 Utilizando alguma ferramenta de requisição, como postman, arc etc..., faça um post para o endpoint /simian para a url  <br>
-**http://localhost:3000**
+<b> http://localhost:3000 </b>
 
 O objeto enviado deverá conter uma key nomeada como **dna** e o seu valor deverá ser um **array de strings**, caso contraŕio , a aplicação retornará erros para a requisição. 
 
