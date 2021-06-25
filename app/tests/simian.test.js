@@ -59,6 +59,30 @@ describe('Simian Component', () => {
         })
     })
 
+    it('Test post with valid and human DNA with subArrays', async () => {
+        const res = await request(server)
+        .post('/simian')
+        .send({dna: [["ATGCGA"], ["CAGTCC"], ["TTATGT"], ["AGATGG"], ["CCTCTA"], ["TCACTG"]]})
+        .set('Accept', 'application/json')
+
+        expect(res.statusCode).toEqual(403);
+        expect(res.body).toEqual({
+            response: 'Human dna not allowed'
+        })
+    })
+
+    it('Test post with invalid KEY', async () => {
+        const res = await request(server)
+        .post('/simian')
+        .send({dnaChain: [["ATGCGA"], ["CAGTCC"], ["TTATGT"], ["AGATGG"], ["CCTCTA"], ["TCACTG"]]})
+        .set('Accept', 'application/json')
+
+        expect(res.statusCode).toEqual(302);
+        expect(res.body).toEqual({
+            error: 'Dna key not provided'
+        })
+    })
+
     it('Test post with invalid dna - not array ', async () => {
         const res = await request(server)
         .post('/simian')
