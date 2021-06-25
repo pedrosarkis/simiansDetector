@@ -11,7 +11,7 @@ Para rodar os testes, execute o comando **npm test **na raíz do projeto. <br>
 
 Para rodar os testes + coverage execute **npm test -- --coverage** <br> 
 
-Para utilizar o serviço de stats, faça uma requisição **/get** para o endpoint** http://localhost:3000/stats**
+Para utilizar o serviço de stats, faça uma requisição **/get** para o endpoint <b> http://localhost:3000/stats </b>
 
 Executando o projeto em produção: 
 
