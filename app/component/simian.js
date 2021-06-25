@@ -1,12 +1,14 @@
 'use strict';
 
-//const { MAX_IN_A_ROW } = require('../helper/consts/constants');
+const { MAX_IN_A_ROW } = require('../helper/consts/constants');
 
 const runMatrix = dna => {
-    let fianchettoDiagonal = [];
+    const fianchettoDiagonal = [];
     //fianchetto é uma forma de desenvolvimento do bispo no xadrez pelas longas diagonais
-	let horizontal = [];
-    let vertical = [];
+	const horizontal = [];
+    const vertical = [];
+    const diagonal = [];
+    const diagonalIndexes = {};
 
     for(let row = 0; row < dna.length; row++) {
 		const currentHorizontalLine = [];
@@ -14,6 +16,17 @@ const runMatrix = dna => {
             if(row === column) {
                 fianchettoDiagonal.push(dna[row][column]);
             }
+
+            if(row === 0 && column >= MAX_IN_A_ROW) {
+                diagonalIndexes[column] = column;
+                diagonal.push([dna[row][column]])
+            }
+
+            if(row !== 0 && diagonalIndexes[column]) {
+                const index = Object.values(diagonalIndexes).findIndex(value => value === column);
+                diagonal[index].push(dna[row][column - row]);
+            }
+
 
 			currentHorizontalLine.push(dna[row][column]);
 
@@ -27,7 +40,7 @@ const runMatrix = dna => {
             vertical[column].push(dna[row][column]);
         }
     }
-    return {fianchettoDiagonal, vertical, horizontal};
+    return {fianchettoDiagonal, vertical, horizontal, diagonal};
 }
 
 const handleVerticalAddition = (array, dnaToAdd, column) => {
@@ -45,9 +58,9 @@ const getHasMoreThan3InARow = dnaChain => {
 
 module.exports = {
     checkSimianCombinations: dna => {
-        const {horizontal, vertical, fianchettoDiagonal } = runMatrix(dna);
+        const {horizontal, vertical, fianchettoDiagonal, diagonal } = runMatrix(dna);
 
-        return checkSequence([...horizontal, ...vertical, ...[fianchettoDiagonal]]);
+        return checkSequence([...horizontal, ...vertical, ...[fianchettoDiagonal], ...diagonal]);
     },
     getStats: dnaResearched => {
         const totalOfSimiansDetected = dnaResearched.filter(({ isSimian }) => isSimian).length;
