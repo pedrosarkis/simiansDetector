@@ -1,4 +1,6 @@
 # simiansDetector
+Os requisitos do projeto estão no arquivo Detector de simians.pdf
+
 Para executar o projeto localmente, clone o repositório, e execute o seguinte comando na pasta raíz do projeto <br>
 <b> node server.js </b>
 
